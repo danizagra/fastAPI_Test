@@ -10,8 +10,9 @@ app = FastAPI()
 
 # Post Model
 
+
 class Post(BaseModel):
-    id: Optional[int or str ]
+    id: Optional[int or str]
     name: str
     username: str
     email: str
@@ -42,6 +43,7 @@ def save_user(post: Post):
     data.append(post.dict())
     return data[-1]
 
+
 @app.get('/posts/{post_id}')
 def get_post(post_id):
     print(post_id)
@@ -50,14 +52,16 @@ def get_post(post_id):
             return post
     raise HTTPException(status_code=404, detail="Nada se encuentra")
 
+
 @app.delete('/posts/{post_id}')
 def delete_post(post_id):
     for index, post in enumerate(data):
         print(post, '<------🟠')
         if str(post['id']) == post_id:
             data.pop(index)
-            return {'message' : 'Se pudo borrar'}
+            return {'message': 'Se pudo borrar'}
     raise HTTPException(status_code=404, detail="Nada se encuentra")
+
 
 @app.post('/posts/{post_id}')
 def update_post(post_id, update_post: Post):
@@ -66,5 +70,5 @@ def update_post(post_id, update_post: Post):
             update_post.id = uuid()
             data.insert(index, update_post.dict())
             data.pop(index+1)
-            return {'message' : 'Se actualizar'}
+            return {'message': 'Se actualizar'}
     raise HTTPException(status_code=404, detail="Nada se encuentra")
