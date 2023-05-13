@@ -28,7 +28,7 @@ with open('mockInfo.json') as mockInfo:
 
 @app.get('/')
 def read_root():
-    return {'Welcome': 'que pasa gonorrea2'}
+    return {'Welcome': 'que pasa ps'}
 
 
 @app.get('/posts')
